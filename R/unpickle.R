@@ -39,18 +39,5 @@ unpickle <-
       stop("Specified connection does not contain a valid pickle definition")
     }
 
-    #' @importFrom 'utils' 'installed.packages'
-    if (length(pickleDefinition[["requiredPackages"]])) {
-      unavailablePackages <-
-        !(pickleDefinition[["requiredPackages"]] %in% installed.packages()[, 1])
-
-      if (any(unavailablePackages)) {
-        stop(
-          "Some dependencies are not available: ",
-          paste0(pickleDefinition[["requiredPackages"]][unavailablePackages], collapse = ", ")
-        )
-      }
-    }
-
     unpickle_(pickleDefinition)
   }
